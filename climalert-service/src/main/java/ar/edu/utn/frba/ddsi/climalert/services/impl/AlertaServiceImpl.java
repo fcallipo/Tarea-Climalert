@@ -4,6 +4,9 @@ import ar.edu.utn.frba.ddsi.climalert.models.entities.Alerta;
 import ar.edu.utn.frba.ddsi.climalert.models.entities.RegistroClima;
 import ar.edu.utn.frba.ddsi.climalert.repositories.inMemory.InMemoryAlertaRepository;
 import ar.edu.utn.frba.ddsi.climalert.repositories.inMemory.InMemoryRegistroClimaRepository;
+import ar.edu.utn.frba.ddsi.climalert.responses.Messages;
+import ar.edu.utn.frba.ddsi.climalert.responses.exceptions.BadRequestException;
+import ar.edu.utn.frba.ddsi.climalert.responses.exceptions.NotFoundException;
 import ar.edu.utn.frba.ddsi.climalert.services.AlertaService;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +32,13 @@ public class AlertaServiceImpl implements AlertaService {
     @Override
     public Alerta analizarUltimoRegistro() {
         RegistroClima ultimoRegistro = registroClimaRepository.buscarUltimo()
-                .orElseThrow(() -> new RuntimeException("No hay registros climáticos disponibles"));
+                .orElseThrow(() ->
+                        new NotFoundException(Messages.CLIMA_NO_ENCONTRADO.getMessage())
+                );
+
+        if (!ultimoRegistro.esCondicionCritica()) {
+            throw new BadRequestException(Messages.ALERTA_NO_GENERADA.getMessage());
+        }
 
         if (!ultimoRegistro.esCondicionCritica()) {
             return null;

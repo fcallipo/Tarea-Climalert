@@ -2,6 +2,8 @@ package ar.edu.utn.frba.ddsi.climalert.services.impl;
 
 import ar.edu.utn.frba.ddsi.climalert.models.entities.RegistroClima;
 import ar.edu.utn.frba.ddsi.climalert.repositories.inMemory.InMemoryRegistroClimaRepository;
+import ar.edu.utn.frba.ddsi.climalert.responses.Messages;
+import ar.edu.utn.frba.ddsi.climalert.responses.exceptions.NotFoundException;
 import ar.edu.utn.frba.ddsi.climalert.services.ClimaService;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,8 @@ public class ClimaServiceImpl implements ClimaService {
     @Override
     public RegistroClima obtenerUltimoRegistro() {
         return registroClimaRepository.buscarUltimo()
-                .orElseThrow(() -> new RuntimeException("No hay registros climáticos disponibles"));
+                .orElseThrow(() ->
+                        new NotFoundException(Messages.CLIMA_NO_ENCONTRADO.getMessage())
+                );
     }
 }
