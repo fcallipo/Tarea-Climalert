@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.ddsi.climalert.controllers;
 
 import ar.edu.utn.frba.ddsi.climalert.models.entities.RegistroClima;
-import ar.edu.utn.frba.ddsi.climalert.services.impl.ClimaServiceImpl;
+import ar.edu.utn.frba.ddsi.climalert.services.ClimaService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/clima")
 public class ClimaController {
 
-    private final ClimaServiceImpl climaService;
+    private final ClimaService climaService;
 
-    public ClimaController(ClimaServiceImpl climaService) {
+    public ClimaController(ClimaService climaService) {
         this.climaService = climaService;
     }
 

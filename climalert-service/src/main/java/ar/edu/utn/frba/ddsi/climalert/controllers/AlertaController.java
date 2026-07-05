@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.ddsi.climalert.controllers;
 
 import ar.edu.utn.frba.ddsi.climalert.models.entities.Alerta;
-import ar.edu.utn.frba.ddsi.climalert.services.impl.AlertaServiceImpl;
+import ar.edu.utn.frba.ddsi.climalert.services.AlertaService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 @RequestMapping("/api/alertas")
 public class AlertaController {
 
-    private final AlertaServiceImpl alertaService;
+    private final AlertaService alertaService;
 
-    public AlertaController(AlertaServiceImpl alertaService) {
+    public AlertaController(AlertaService alertaService) {
         this.alertaService = alertaService;
     }
 

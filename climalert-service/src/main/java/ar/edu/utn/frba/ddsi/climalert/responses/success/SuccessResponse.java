@@ -1,10 +1,8 @@
 package ar.edu.utn.frba.ddsi.climalert.responses.success;
 
 import java.time.LocalDateTime;
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Getter
 public class SuccessResponse {
 
     private final int status;
@@ -15,5 +13,17 @@ public class SuccessResponse {
         this.message = message;
         this.status = status.value();
         this.timestamp = LocalDateTime.now();
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
     }
 }

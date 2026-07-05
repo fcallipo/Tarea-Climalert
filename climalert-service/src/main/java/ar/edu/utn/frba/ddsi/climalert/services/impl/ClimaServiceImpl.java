@@ -1,10 +1,11 @@
 package ar.edu.utn.frba.ddsi.climalert.services.impl;
 
 import ar.edu.utn.frba.ddsi.climalert.models.entities.RegistroClima;
-import ar.edu.utn.frba.ddsi.climalert.repositories.inMemory.InMemoryRegistroClimaRepository;
+import ar.edu.utn.frba.ddsi.climalert.repositories.RegistroClimaRepository;
 import ar.edu.utn.frba.ddsi.climalert.responses.Messages;
 import ar.edu.utn.frba.ddsi.climalert.responses.exceptions.NotFoundException;
 import ar.edu.utn.frba.ddsi.climalert.services.ClimaService;
+import ar.edu.utn.frba.ddsi.climalert.services.WeatherService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,12 +13,12 @@ import java.util.List;
 @Service
 public class ClimaServiceImpl implements ClimaService {
 
-    private final InMemoryRegistroClimaRepository registroClimaRepository;
-    private final WeatherServiceImpl weatherService;
+    private final RegistroClimaRepository registroClimaRepository;
+    private final WeatherService weatherService;
 
     public ClimaServiceImpl(
-            InMemoryRegistroClimaRepository registroClimaRepository,
-            WeatherServiceImpl weatherService
+            RegistroClimaRepository registroClimaRepository,
+            WeatherService weatherService
     ) {
         this.registroClimaRepository = registroClimaRepository;
         this.weatherService = weatherService;

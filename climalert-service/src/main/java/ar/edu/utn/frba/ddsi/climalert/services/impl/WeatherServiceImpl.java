@@ -2,9 +2,11 @@ package ar.edu.utn.frba.ddsi.climalert.services.impl;
 
 import ar.edu.utn.frba.ddsi.climalert.dto.WeatherApiResponseDTO;
 import ar.edu.utn.frba.ddsi.climalert.models.entities.RegistroClima;
+import ar.edu.utn.frba.ddsi.climalert.responses.Messages;
 import ar.edu.utn.frba.ddsi.climalert.services.WeatherService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -32,13 +34,18 @@ public class WeatherServiceImpl implements WeatherService {
                 + "&q=" + weatherApiLocation
                 + "&aqi=no";
 
-        WeatherApiResponseDTO response = restTemplate.getForObject(
-                url,
-                WeatherApiResponseDTO.class
-        );
+        WeatherApiResponseDTO response;
+        try {
+            response = restTemplate.getForObject(
+                    url,
+                    WeatherApiResponseDTO.class
+            );
+        } catch (RestClientException exception) {
+            throw new IllegalStateException(Messages.WEATHER_API_ERROR.getMessage(), exception);
+        }
 
         if (response == null || response.getCurrent() == null || response.getLocation() == null) {
-            throw new RuntimeException("No se pudo obtener información climática desde WeatherAPI");
+            throw new IllegalStateException(Messages.WEATHER_API_ERROR.getMessage());
         }
 
         return new RegistroClima(

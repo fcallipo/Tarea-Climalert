@@ -2,12 +2,13 @@ package ar.edu.utn.frba.ddsi.climalert.services.impl;
 
 import ar.edu.utn.frba.ddsi.climalert.models.entities.Alerta;
 import ar.edu.utn.frba.ddsi.climalert.models.entities.RegistroClima;
-import ar.edu.utn.frba.ddsi.climalert.repositories.inMemory.InMemoryAlertaRepository;
-import ar.edu.utn.frba.ddsi.climalert.repositories.inMemory.InMemoryRegistroClimaRepository;
+import ar.edu.utn.frba.ddsi.climalert.repositories.AlertaRepository;
+import ar.edu.utn.frba.ddsi.climalert.repositories.RegistroClimaRepository;
 import ar.edu.utn.frba.ddsi.climalert.responses.Messages;
 import ar.edu.utn.frba.ddsi.climalert.responses.exceptions.BadRequestException;
 import ar.edu.utn.frba.ddsi.climalert.responses.exceptions.NotFoundException;
 import ar.edu.utn.frba.ddsi.climalert.services.AlertaService;
+import ar.edu.utn.frba.ddsi.climalert.services.EmailService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +16,14 @@ import java.util.List;
 @Service
 public class AlertaServiceImpl implements AlertaService {
 
-    private final InMemoryRegistroClimaRepository registroClimaRepository;
-    private final InMemoryAlertaRepository alertaRepository;
-    private final EmailServiceImpl emailService;
+    private final RegistroClimaRepository registroClimaRepository;
+    private final AlertaRepository alertaRepository;
+    private final EmailService emailService;
 
     public AlertaServiceImpl(
-            InMemoryRegistroClimaRepository registroClimaRepository,
-            InMemoryAlertaRepository alertaRepository,
-            EmailServiceImpl emailService
+            RegistroClimaRepository registroClimaRepository,
+            AlertaRepository alertaRepository,
+            EmailService emailService
     ) {
         this.registroClimaRepository = registroClimaRepository;
         this.alertaRepository = alertaRepository;
@@ -40,10 +41,14 @@ public class AlertaServiceImpl implements AlertaService {
             throw new BadRequestException(Messages.ALERTA_NO_GENERADA.getMessage());
         }
 
-        if (!ultimoRegistro.esCondicionCritica()) {
-            return null;
-        }
+        return alertaRepository.buscarTodas().stream()
+                .filter(alerta -> alerta.getRegistroClima() != null)
+                .filter(alerta -> ultimoRegistro.getCodigo().equals(alerta.getRegistroClima().getCodigo()))
+                .findFirst()
+                .orElseGet(() -> this.generarAlerta(ultimoRegistro));
+    }
 
+    private Alerta generarAlerta(RegistroClima ultimoRegistro) {
         Alerta alerta = new Alerta(ultimoRegistro);
 
         alertaRepository.guardar(alerta);

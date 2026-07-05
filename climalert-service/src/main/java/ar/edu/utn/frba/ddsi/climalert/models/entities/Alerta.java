@@ -1,23 +1,29 @@
 package ar.edu.utn.frba.ddsi.climalert.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class Alerta {
 
     private String codigo;
     private RegistroClima registroClima;
     private String descripcion;
     private LocalDateTime fechaGeneracion;
+
+    public Alerta() {
+    }
+
+    public Alerta(
+            String codigo,
+            RegistroClima registroClima,
+            String descripcion,
+            LocalDateTime fechaGeneracion
+    ) {
+        this.codigo = codigo;
+        this.registroClima = registroClima;
+        this.descripcion = descripcion;
+        this.fechaGeneracion = fechaGeneracion;
+    }
 
     public Alerta(RegistroClima registroClima) {
         this.codigo = UUID.randomUUID().toString();
@@ -31,5 +37,37 @@ public class Alerta {
                 + "Temperatura actual: " + registroClima.getTemperatura() + "°. "
                 + "Humedad actual: " + registroClima.getHumedad() + "%. "
                 + "Ubicación: " + registroClima.getUbicacion() + ".";
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public RegistroClima getRegistroClima() {
+        return registroClima;
+    }
+
+    public void setRegistroClima(RegistroClima registroClima) {
+        this.registroClima = registroClima;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public LocalDateTime getFechaGeneracion() {
+        return fechaGeneracion;
+    }
+
+    public void setFechaGeneracion(LocalDateTime fechaGeneracion) {
+        this.fechaGeneracion = fechaGeneracion;
     }
 }

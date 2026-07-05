@@ -1,0 +1,46 @@
+[ {
+  "codigo" : "087dd6b5-bd4e-4915-8563-f70b5d28c407",
+  "ubicacion" : "Buenos Aires",
+  "temperatura" : 7.1,
+  "humedad" : 100,
+  "condicion" : "Light rain",
+  "sensacionTermica" : 5.2,
+  "velocidadViento" : 10.1,
+  "fechaRegistro" : "2026-07-05T20:12:45.683795"
+}, {
+  "codigo" : "b6eec650-6c71-4f56-877a-b548952e5dd2",
+  "ubicacion" : "Buenos Aires",
+  "temperatura" : 7.1,
+  "humedad" : 100,
+  "condicion" : "Light rain",
+  "sensacionTermica" : 5.2,
+  "velocidadViento" : 10.1,
+  "fechaRegistro" : "2026-07-05T20:12:59.109439"
+}, {
+  "codigo" : "9b4c3f3a-7bc1-4f95-a15e-a8e224262bbc",
+  "ubicacion" : "Buenos Aires",
+  "temperatura" : 7.1,
+  "humedad" : 100,
+  "condicion" : "Light rain",
+  "sensacionTermica" : 5.2,
+  "velocidadViento" : 10.1,
+  "fechaRegistro" : "2026-07-05T20:17:45.311896"
+}, {
+  "codigo" : "d73bb73c-788b-4089-b64c-483e7328e22d",
+  "ubicacion" : "Buenos Aires",
+  "temperatura" : 7.1,
+  "humedad" : 100,
+  "condicion" : "Light rain",
+  "sensacionTermica" : 5.2,
+  "velocidadViento" : 10.1,
+  "fechaRegistro" : "2026-07-05T20:25:05.847656"
+}, {
+  "codigo" : "c7a8fde4-7320-4d04-b83c-9fca32364483",
+  "ubicacion" : "Buenos Aires",
+  "temperatura" : 7.1,
+  "humedad" : 100,
+  "condicion" : "Light rain",
+  "sensacionTermica" : 5.2,
+  "velocidadViento" : 10.1,
+  "fechaRegistro" : "2026-07-05T20:25:05.920989"
+} ]

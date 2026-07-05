@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.ddsi.climalert.responses.exceptions;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Getter
 public class AppException extends RuntimeException {
 
     private final HttpStatus status;
@@ -11,5 +9,9 @@ public class AppException extends RuntimeException {
     public AppException(String message, HttpStatus status) {
         super(message);
         this.status = status;
+    }
+
+    public HttpStatus getStatus() {
+        return status;
     }
 }
